@@ -7,11 +7,12 @@
   <title>Five Guys</title>
   <link rel="stylesheet" type="text/css" href="/css/jass.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
   <header>
-    <h1>Welcome to Five Guys!</h1>
+    <h1>Checkout</h1>
   </header>
   <nav>
     <a href="/">Home</a>
@@ -25,14 +26,12 @@
     <aside>
       <h2>Shopping Cart</h2>
     </aside>
-    {{!-- TODO: CHANGE gallery TO menu AND UPDATE ALL REFERENCES IN CSS --}}
     <div class="gallery">
       {{!-- {{{body}}} --}}
     </div>
   </main>
   {{!-- {{#if loggedIn}} --}}
   {{!-- /js/logout.js will have event listener for #logout --}}
-  {{!-- TODO: Update src path once logout.js is completed --}}
   {{!-- <script src="/js/logout.js"></script>
   {{/if}} --}}
 </body>
