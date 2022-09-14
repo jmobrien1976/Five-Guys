@@ -10,4 +10,4 @@ Menu_items.belongsToMany(User, {
   through: User,
 });
 
-module.exports = { User, Menu, Cart };
+module.exports = { User, Menu_items, Cart };
