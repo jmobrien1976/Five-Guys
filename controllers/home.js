@@ -1,5 +1,5 @@
 const router = require('express').Router();
-//const { } = require('../models');
+const Menu_items = require("../models/Menu");
 
 //TODO: Show buttons when not logged in, only check login on "add to cart"
 router.get("/", async (req, res) => {
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
       loggedIn: req.session.loggedIn 
     });
   } catch (err) {
-    res.redirect("login");
+    res.render('login',{layout:'main'});
   }
 });
 
