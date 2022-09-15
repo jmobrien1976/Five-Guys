@@ -18,7 +18,7 @@ Cart.init(
         key: "id",
       },
     },
-    description: {
+    menu_item_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "menu",
