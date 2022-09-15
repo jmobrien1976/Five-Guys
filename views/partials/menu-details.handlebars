@@ -1,11 +1,9 @@
 <section class="card">
-  {{!-- TODO: REPLACE painting WITH menu AND UPDATE ANY REFERENCES --}}
-  <a href="/painting/{{id}}">
-    <header>{{title}}</header>
+  <header>{{Menu.name}}</header>
 
-    <div class="card-body">
-      {{!-- TODO: REPLACE artist WITH item AND UPDATE ANY REFERENCES --}}
-      <p>{{artist}}</p>
-    </div>
-  </a>
+  <div class="card-body">
+      <p>{{Menu.description}}</p>
+      <button class="menu-btn bg-danger">Add {{Menu.name}} to Cart</button>
+  </div>
 </section>
+            
