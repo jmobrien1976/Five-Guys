@@ -22,7 +22,9 @@ router.get('/login', (req, res) => {
 
 router.get('/checkout',(req,res)=>{
   if (req.session.loggedIn) {
-    res.render('checkout');
+    res.render('checkout',{
+      loggedIn: req.session.loggedIn,
+    });
     return;
   }
   res.render('login',{layout:'main'});
