@@ -2,12 +2,13 @@ const User = require("./user");
 const Menu_items = require("./Menu");
 const Cart = require("./cart");
 
-User.belongsToMany(Menu_items, {
-  through: Cart,
+Cart.belongsTo(User,{
+  foreignKey:"user_id"
 });
 
-Menu_items.belongsToMany(User, {
-  through: User,
-});
+// User.hasOne(Cart,{
+
+// })
+
 
 module.exports = { User, Menu_items, Cart };
