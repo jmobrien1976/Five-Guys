@@ -4,7 +4,6 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
-//THIS IS THE SECRET KEY DO NOT PUBLISH
 
 
 const app = express();
