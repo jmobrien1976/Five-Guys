@@ -3,38 +3,19 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-
+require('dotenv').config();
 //THIS IS THE SECRET KEY DO NOT PUBLISH
-const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
+console.log(process.env.STRIPE_SECRETKEY);
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const helpers = require('./utils/helpers');
 
-const calcOrderAmount = (items) => {
-  //do calculation of total order here
-  return 10;
-};
 
-app.post("/create-payment-intent", async (req, res) => {
-  const { items } = req.body;
-
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: "usd",
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
-
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
-});
 
 
 const sess = {
@@ -58,11 +39,32 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+
+const calcOrderAmount = (items) => {
+  //do calculation of total order here
+  return 50;
+};
+
+app.post("/create-payment-intent", async (req, res) => {
+  console.log(req.body);
+  const { items } = req.body;
+  
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: calcOrderAmount(items),
+    currency: "usd",
+    payment_method_types: ['card'],
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
@@ -71,3 +73,4 @@ sequelize.sync({ force: false }).then(() => {
     )
   );
 });
+

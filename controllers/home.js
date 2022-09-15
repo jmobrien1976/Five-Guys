@@ -19,5 +19,13 @@ router.get('/login', (req, res) => {
     }
     res.render('login',{layout:'main'});
 });
+
+router.get('/checkout',(req,res)=>{
+  if (req.session.loggedIn) {
+    res.render('checkout');
+    return;
+  }
+  res.render('login',{layout:'main'});
+});
   
 module.exports = router;
