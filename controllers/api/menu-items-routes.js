@@ -5,10 +5,13 @@ const Menu_items = require("../../models/Menu");
 router.get("/", async (req, res) => {
   try {
     const menuData = await Menu_items.findAll();
-    // res.json(menuData);
+    //res.json(menuData);
     const menuItems = menuData.map((items) => items.get({ plain: true }));
-
-    res.render("menu-details", { menuItems });
+    //res.json(menuItems);
+    res.render("homepage", { 
+      menuItems,
+      loggedIn: req.session.loggedIn 
+    });
     //TODO: test to make sure it runs with real data
   } catch (err) {
     res.redirect("login");

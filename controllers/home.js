@@ -1,14 +1,19 @@
 const router = require('express').Router();
 //const { } = require('../models');
 
-router.get('/', async (req, res) => {
+//TODO: Show buttons when not logged in, only check login on "add to cart"
+router.get("/", async (req, res) => {
   try {
-    res.render('homepage', {
-      loggedIn: req.session.loggedIn,
+    const menuData = await Menu_items.findAll();
+    //res.json(menuData);
+    const menuItems = menuData.map((items) => items.get({ plain: true }));
+    //res.json(menuItems);
+    res.render("homepage", { 
+      menuItems,
+      loggedIn: req.session.loggedIn 
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+    res.redirect("login");
   }
 });
 
