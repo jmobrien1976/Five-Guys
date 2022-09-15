@@ -18,12 +18,9 @@ Cart.init(
         key: "id",
       },
     },
+    //store array of json objects describing the menu items.
     menu_item_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "menu",
-        key: "id",
-      },
+      type: DataTypes.ARRAY(DataTypes.STRING),
     },
   },
   {
