@@ -1,10 +1,8 @@
-const test = require('dotenv').config();
-const sequelize = require('../config/connection.js');
+const test = require("dotenv").config();
+const sequelize = require("../config/connection.js");
 const menuData = require("./menuSeedData.json");
-const seedMenu = require("./menuData");
-const { menu } = require('../models');
-
-
+const seedMenu = require("./menuData.js");
+const { menu } = require("../models");
 
 const seedDatabase = async () => {
   console.log(test);
