@@ -1,5 +1,5 @@
 const User = require("./user");
-const Menu_items = require("./menu");
+const Menu_items = require("./Menu");
 const Cart = require("./cart");
 
 User.belongsToMany(Menu_items, {
