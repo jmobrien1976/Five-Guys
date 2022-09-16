@@ -1,7 +1,7 @@
 
-const addToCart = async (event) => {
+async function addToCart(event,name,price){
     //TO DO, ACTAULLY DO THE THING
-    console.log("It works");
+    console.log(name+" is "+price);
     const response = await fetch('/api/cart/', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -14,7 +14,9 @@ const addToCart = async (event) => {
 
 
 let btnList = document.querySelectorAll('.menu-btn')
+
 for(const item of btnList){
-    item.addEventListener('click', addToCart);
+    let split = item.textContent.split("$");
+    item.addEventListener('click', function(event){addToCart(event,item.parentNode.parentNode.childNodes[1].textContent,split[1])});
 }
 
