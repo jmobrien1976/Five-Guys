@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User,Cart } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
@@ -8,13 +8,19 @@ router.post('/', async (req, res) => {
         email: req.body.email,
         password: req.body.password,
       });
-  
+      
       req.session.save(() => {
        
         req.session.loggedIn = true;
-  
+        req.session.currentUser = dbUserData.id;
+        Cart.create(
+          {
+              user_id:dbUserData.id
+          }
+        );
         res.status(200).json(dbUserData);
       });
+      
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
