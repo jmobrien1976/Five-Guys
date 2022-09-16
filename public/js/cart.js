@@ -1,7 +1,7 @@
 // async function addToCart(event,name,price){
 //     //TO DO, ACTAULLY DO THE THING
 //     console.log(name+" is "+price);
-//     const response = await fetch('/api/cart/', {
+//     const response = await fetch('/cart/', {
 //         method: 'GET',
 //         headers: { 'Content-Type': 'application/json' },
 //       });
@@ -14,7 +14,7 @@
 async function addToCart(event, name, price) {
   //TO DO, ACTAULLY DO THE THING
   console.log(name + " is " + price);
-  const response = await fetch("/api/cart/", {
+  const response = await fetch("/api/cart", {
     method: "POST",
     body: JSON.stringify({
       name,
@@ -22,10 +22,7 @@ async function addToCart(event, name, price) {
     }),
     headers: { "Content-Type": "application/json" },
   });
-  if (response.ok) {
-    const resolved = await response.json();
-    console.log(resolved);
-  }
+
 }
 
 let btnList = document.querySelectorAll(".menu-btn");

@@ -12,7 +12,11 @@ router.get("/", async (req, res) => {
         user_id: req.session.currentUser,
       });
     }
-    res.status(200).json(cart);
+    const menuData = await Menu_items.findAll();
+    //res.json(menuData);
+    const menuItems = menuData.map((items) => items.get({ plain: true }));
+    res.redirect("/");
+    //res.status(200).json(cart);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -25,24 +29,18 @@ router.post("/", async (req, res) => {
       where: { user_id: req.session.currentUser },
     });
     let cartContents = addedItem[0].menu_item_id;
-    console.log("this is " + cartContents);
-
-    console.log("NEW " + !cartContents);
     if (!cartContents) {
-      console.log("HERE " + cartContents);
       cartContents = JSON.stringify([req.body]);
     } else {
-      let itemAdd = JSON.parse(JSON.parse(cartContents));
+      var itemAdd = JSON.parse(JSON.parse(cartContents));
+      var displayCart = false;
+      if(itemAdd.length > 0){
+        displayCart = true;
+      }
       itemAdd.push(req.body);
       cartContents = JSON.stringify(itemAdd);
-      // most recent commit change
-      const menuData = await Menu_items.findAll();
-      const menuItems = menuData.map((items) => items.get({ plain: true }));
-      res.render("homepage", { 
-        itemAdd,
-        menuItems,
-        loggedIn: req.session.loggedIn 
-      });
+      var menuData = await Menu_items.findAll();
+      var menuItems = menuData.map((items) => items.get({ plain: true }));
     }
     let updateCart = await Cart.update(
       {
@@ -50,8 +48,13 @@ router.post("/", async (req, res) => {
       },
       { where: { user_id: req.session.currentUser } }
     );
+    res.render("homepage", { 
+      displayCart,
+      itemAdd,
+      menuItems,
+      loggedIn: req.session.loggedIn 
+    });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
