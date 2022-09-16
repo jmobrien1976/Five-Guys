@@ -48,12 +48,7 @@ router.post("/", async (req, res) => {
       },
       { where: { user_id: req.session.currentUser } }
     );
-    res.render("homepage", { 
-      displayCart,
-      itemAdd,
-      menuItems,
-      loggedIn: req.session.loggedIn 
-    });
+    res.redirect("/");
   } catch (err) {
     res.status(500).json(err);
   }
