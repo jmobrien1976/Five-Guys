@@ -22,7 +22,7 @@ async function addToCart(event, name, price) {
     }),
     headers: { "Content-Type": "application/json" },
   });
-
+  window.location.reload();
 }
 
 let btnList = document.querySelectorAll(".menu-btn");
