@@ -4,14 +4,17 @@ const {Menu_items,Cart} = require("../../models");
 router.get('/',async (req,res) =>{
     try {
         console.log(req.session.currentUser);
-        const cart = await Cart.findAll(
+        let cart = await Cart.findAll(
             {
                 where:{user_id:req.session.currentUser}
             }
         );
-        if(!cart){
-            res.status(404).json({message:"No cart has been created for this user."});
-            return;
+        if(cart===[]){
+            cart = await Cart.create(
+                {
+                    user_id:req.session.currentUser
+                }
+            );
         }
         res.status(200).json(cart);
     } catch (err) {
