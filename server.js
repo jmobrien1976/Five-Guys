@@ -32,20 +32,29 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({ helpers,layoutsDir:__dirname + "/views/layouts"});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join('public')));
 
 app.use(routes);
 
 
 const calcOrderAmount = (items) => {
   //do calculation of total order here
+  //get cart for current user
+
+  //parse menu_items_id field (double parse it to get the objects)
+
+  //sum up the cost variables for all items in the cart.
+
+  //return the sum
+
+  //this says 50 cents
   return 50;
 };
 
