@@ -35,6 +35,14 @@ router.post("/", async (req, res) => {
       let itemAdd = JSON.parse(JSON.parse(cartContents));
       itemAdd.push(req.body);
       cartContents = JSON.stringify(itemAdd);
+      // most recent commit change
+      const menuData = await Menu_items.findAll();
+      const menuItems = menuData.map((items) => items.get({ plain: true }));
+      res.render("homepage", { 
+        itemAdd,
+        menuItems,
+        loggedIn: req.session.loggedIn 
+      });
     }
     let updateCart = await Cart.update(
       {
@@ -43,6 +51,7 @@ router.post("/", async (req, res) => {
       { where: { user_id: req.session.currentUser } }
     );
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
