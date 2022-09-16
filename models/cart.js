@@ -20,7 +20,7 @@ Cart.init(
     },
     //store array of json objects describing the menu items.
     menu_item_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
   },
   {

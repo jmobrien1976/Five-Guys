@@ -7,6 +7,9 @@
     <title>Five Guys</title>
     <link rel="stylesheet" type="text/css" href="../../public/css/jass.css">
     <link rel="stylesheet" type="text/css" href="../../public/css/style.css">
+<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 
 <body>
@@ -22,14 +25,18 @@
         <!-- {{!-- {{/if}} --}} -->
     </nav>
     <main>
-        <aside style="padding: 25px" width="30%">
+        <div class="p-2 width border">
             <h2>Shopping Cart</h2>
-            <div style="display: flex; justify-content: space-around;">
-                <p>Menu.name</p>
-                <p>Menu.price</p>
+            <div class="container">
+                <div class="row">
+                    <p class="col">x1</p>
+                    <p class="col">hamburger</p>
+                    <p class="col">$9.99</p>
+                </div>
             </div>
-            <p>Menu.description</p>
-        </aside>
+            <h4>Total = ${{sum.price}}</h4>
+            </div>
+        </div>
         <!-- ? Should we change gallery to something different? -->
         <div class="gallery"> 
         <!-- {{!-- {{{body}}} --}} -->
