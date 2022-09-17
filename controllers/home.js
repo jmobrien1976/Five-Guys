@@ -39,9 +39,22 @@ router.get('/login', (req, res) => {
     res.render('login',{layout:'main'});
 });
 
-router.get('/checkout',(req,res)=>{
+router.get('/checkout',async (req,res)=>{
   if (req.session.loggedIn) {
+    const addedItem = await Cart.findAll({
+      where: { user_id: req.session.currentUser },
+    });
+    let displayCart = false;
+    let cartContents = addedItem[0].menu_item_id;
+    if (cartContents) {
+      var itemAdd = JSON.parse(JSON.parse(cartContents));
+      if(itemAdd.length > 0){
+        displayCart = true;
+      }
+    }
     res.render('checkout',{
+      displayCart,
+      itemAdd,
       loggedIn: req.session.loggedIn,
     });
     return;
