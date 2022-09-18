@@ -44,14 +44,16 @@ const signupFormHandler = async (event) => {
     
         if (response.ok) {
           document.location.replace('/');
+        
         } else {
           alert('Failed to log in.');
         }
       } else {
         alert('Failed to sign up.');
       }
-    }
-  };
+     
+  }
+};
 
 document
   .querySelector('.login-form')
