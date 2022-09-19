@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const {Menu_items,Cart} = require("../models");
+const router = require("express").Router();
+const { Menu_items, Cart } = require("../models");
 
 //TODO: Show buttons when not logged in, only check login on "add to cart"
 router.get("/", async (req, res) => {
@@ -15,37 +15,37 @@ router.get("/", async (req, res) => {
     var subTotal = 0;
     if (cartContents) {
       var itemAdd = JSON.parse(JSON.parse(cartContents));
-      if(itemAdd.length > 0){
+      if (itemAdd.length > 0) {
         displayCart = true;
         for (const item of itemAdd) {
           subTotal += Number.parseFloat(item.price);
         }
+        subTotal = Math.round(subTotal * 100) / 100;
         console.log(subTotal);
       }
     }
     //res.json(menuItems);
-    res.render("homepage", { 
+    res.render("homepage", {
       displayCart,
       itemAdd,
       subTotal,
       menuItems,
-      loggedIn: req.session.loggedIn 
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
-    res.render('login',{layout:'main'});
+    res.render("login", { layout: "main" });
   }
 });
 
-
-router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect('/');
-      return;
-    }
-    res.render('login',{layout:'main'});
+router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("login", { layout: "main" });
 });
 
-router.get('/checkout',async (req,res)=>{
+router.get("/checkout", async (req, res) => {
   if (req.session.loggedIn) {
     const addedItem = await Cart.findAll({
       where: { user_id: req.session.currentUser },
@@ -60,10 +60,10 @@ router.get('/checkout',async (req,res)=>{
         for (const item of itemAdd) {
           subTotal += Number.parseFloat(item.price);
         }
-        console.log(subTotal);
+        subTotal = Math.round(subTotal * 100) / 100;
       }
     }
-    res.render('checkout',{
+    res.render("checkout", {
       displayCart,
       itemAdd,
       subTotal,
@@ -71,9 +71,9 @@ router.get('/checkout',async (req,res)=>{
     });
     return;
   }
-  res.render('login',{layout:'main'});
+  res.render("login", { layout: "main" });
 });
-  
+
 router.post("/view-cart", async (req, res) => {
   try {
     console.log(req.body);
@@ -81,12 +81,12 @@ router.post("/view-cart", async (req, res) => {
     //res.json(menuData);
     const menuItems = menuData.map((items) => items.get({ plain: true }));
     //res.json(menuItems);
-    res.render("homepage", { 
+    res.render("homepage", {
       menuItems,
-      loggedIn: req.session.loggedIn 
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
-    res.render('login',{layout:'main'});
+    res.render("login", { layout: "main" });
   }
 });
 
@@ -118,9 +118,9 @@ router.post("/view-cart", async (req, res) => {
 //       { where: { user_id: req.session.currentUser } }
 //     );
 //     console.log(res);
-//     res.render("homepage", { 
+//     res.render("homepage", {
 //       menuItems,
-//       loggedIn: req.session.loggedIn 
+//       loggedIn: req.session.loggedIn
 //     });
 //   } catch (err) {
 //     console.log(err);
