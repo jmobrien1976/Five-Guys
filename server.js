@@ -63,7 +63,7 @@ const calcOrderAmount = (items) => {
   if (subTotal === 0) {
     return 50;
   }
-  return subTotal * 100;
+  return Math.round(subTotal * 100);
 };
 
 app.post("/create-payment-intent", async (req, res) => {
