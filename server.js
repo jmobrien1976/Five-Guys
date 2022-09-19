@@ -1,21 +1,19 @@
-
-const path = require('path');
-const express = require('express');
-const session = require('express-session');
-const exphbs = require('express-handlebars');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-require('dotenv').config();
+const path = require("path");
+const express = require("express");
+const session = require("express-session");
+const exphbs = require("express-handlebars");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+require("dotenv").config();
 const { Menu_items, Cart } = require("./models");
-
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
 console.log(process.env.STRIPE_SECRETKEY);
-const routes = require('./controllers');
-const sequelize = require('./config/connection');
-const helpers = require('./utils/helpers');
-const { parse } = require('path');
+const routes = require("./controllers");
+const sequelize = require("./config/connection");
+const helpers = require("./utils/helpers");
+const { parse } = require("path");
 
 const sess = {
   secret: "Super secret secret",
@@ -46,29 +44,22 @@ app.use(express.static(path.join("public")));
 
 app.use(routes);
 
-const { Menu_items, Cart } = require("./models");
 const calcOrderAmount = (items) => {
   console.log(items);
   var subTotal = 0;
 
-
   const cartContents = items[0].menu_item_id;
   const itemTemp = JSON.parse(JSON.parse(cartContents));
 
-console.log(itemTemp);
+  console.log(itemTemp);
 
+  for (const item of itemTemp) {
+    subTotal += Number.parseFloat(item.price);
+    console.log(subTotal);
+  }
 
-
-for (const item of itemTemp) {
-    
-  subTotal += Number.parseFloat(item.price);
-  console.log (subTotal);
-}
-    
   return subTotal * 100;
-
 };
-
 
 app.post("/create-payment-intent", async (req, res) => {
   console.log(`PAYMENT: ${req.body}`);
@@ -76,8 +67,8 @@ app.post("/create-payment-intent", async (req, res) => {
 
   let cart = await Cart.findAll({
     where: { user_id: req.session.currentUser },
-  });  
-  
+  });
+
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calcOrderAmount(cart),
