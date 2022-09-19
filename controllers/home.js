@@ -12,16 +12,22 @@ router.get("/", async (req, res) => {
     });
     let displayCart = false;
     let cartContents = addedItem[0].menu_item_id;
+    var subTotal = 0;
     if (cartContents) {
       var itemAdd = JSON.parse(JSON.parse(cartContents));
       if(itemAdd.length > 0){
         displayCart = true;
+        for (const item of itemAdd) {
+          subTotal += Number.parseFloat(item.price);
+        }
+        console.log(subTotal);
       }
     }
     //res.json(menuItems);
     res.render("homepage", { 
       displayCart,
       itemAdd,
+      subTotal,
       menuItems,
       loggedIn: req.session.loggedIn 
     });
@@ -46,15 +52,21 @@ router.get('/checkout',async (req,res)=>{
     });
     let displayCart = false;
     let cartContents = addedItem[0].menu_item_id;
+    var subTotal = 0;
     if (cartContents) {
       var itemAdd = JSON.parse(JSON.parse(cartContents));
-      if(itemAdd.length > 0){
+      if (itemAdd.length > 0) {
         displayCart = true;
+        for (const item of itemAdd) {
+          subTotal += Number.parseFloat(item.price);
+        }
+        console.log(subTotal);
       }
     }
     res.render('checkout',{
       displayCart,
       itemAdd,
+      subTotal,
       loggedIn: req.session.loggedIn,
     });
     return;
