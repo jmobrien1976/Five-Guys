@@ -2,7 +2,7 @@ const { Menu_items } = require("../models");
 
 const menudata = [
   {
-    name: "hambuger",
+    name: "hamburger",
     description: "meat and bacon",
     price: "9.99",
   },
