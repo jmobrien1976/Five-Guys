@@ -1,8 +1,9 @@
-
 // This is your test publishable API key.
 //THIS IS DIFFERENT FROM THE PRIVATE KEY.
 //DO NOT PUT THE PRIVATE KEY HERE.
-const stripe = Stripe("pk_test_51Li1hYDFBMuDRAYCYo97FubwyZe65b1Lq9UF1u36je7Jm6uY8iPZ83WBy1IiPAfvtMj3AgBgTZ955cPhi3HhKgGM00GDNobYlW");
+const stripe = Stripe(
+  "pk_test_51Li1hYDFBMuDRAYCYo97FubwyZe65b1Lq9UF1u36je7Jm6uY8iPZ83WBy1IiPAfvtMj3AgBgTZ955cPhi3HhKgGM00GDNobYlW"
+);
 
 // The items the customer wants to buy
 //TODO: hook up actual list of items to this.
@@ -19,17 +20,17 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-    console.log(items);
-    console.log(JSON.stringify({items}));
+  console.log(items);
+  console.log(JSON.stringify({ items }));
   const response = await fetch("/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({items})
+    body: JSON.stringify({ items }),
   });
   const { clientSecret } = await response.json();
   console.log("here");
   const appearance = {
-    theme: 'stripe',
+    theme: "stripe",
   };
   elements = stripe.elements({ appearance, clientSecret });
 
@@ -40,7 +41,8 @@ async function initialize() {
 async function handleSubmit(e) {
   e.preventDefault();
   setLoading(true);
-
+  await resetCart();
+  console.log("reset cart complete");
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
@@ -117,4 +119,13 @@ function setLoading(isLoading) {
     document.querySelector("#spinner").classList.add("hidden");
     document.querySelector("#button-text").classList.remove("hidden");
   }
+}
+
+//reset cart to empty
+async function resetCart() {
+  const response = await fetch("/api/cart", {
+    method: "PUT",
+    body: null,
+    headers: { "Content-Type": "application/json" },
+  });
 }

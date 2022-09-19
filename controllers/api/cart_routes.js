@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
     } else {
       var itemAdd = JSON.parse(JSON.parse(cartContents));
       var displayCart = false;
-      if(itemAdd.length > 0){
+      if (itemAdd.length > 0) {
         displayCart = true;
       }
       itemAdd.push(req.body);
@@ -49,6 +49,22 @@ router.post("/", async (req, res) => {
       { where: { user_id: req.session.currentUser } }
     );
     res.redirect("/");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.put("/", async (req, res) => {
+  try {
+    let cart = await Cart.update(
+      {
+        menu_item_id: null,
+      },
+      {
+        where: { user_id: req.session.currentUser },
+      }
+    );
+    res.status(200).json({ message: "OK" });
   } catch (err) {
     res.status(500).json(err);
   }
