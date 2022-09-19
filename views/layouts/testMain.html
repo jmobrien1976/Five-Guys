@@ -25,30 +25,59 @@
         <!-- {{!-- {{/if}} --}} -->
     </nav>
     <main>
-        <div class="p-2 width border">
-            <h2>Shopping Cart</h2>
-            <div class="container">
-                <div class="row justify-content-end w-100">
-                    <p class="col-9">hamburger</p>
-                    <p class="col-3">$9.99</p>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row justify-content-end w-100">
-                    <p class="col-9">cheese</p>
-                    <p class="col-3">$9.99</p>
-                </div>
-            </div>
-            <h4>Total = ${{sum.price}}</h4>
-            </div>
-        </div>
         <!-- ? Should we change gallery to something different? -->
         <div class="gallery"> 
         <!-- {{!-- {{{body}}} --}} -->
+        <div class="container-fluid d-flex flex-column">
+            <div class="row justify-space-between-md justify-content-center">
+                <div id="login" class="login-card m-2">
+                    <h2 class="page-title">Login</h2>
+                    <form class="form login-form">
+                        <div class="form-group">
+                            <label for="email-login">Email:</label>
+                            <input class="form-input" type="text" id="email-login" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password-login">Password:</label>
+                            <input class="form-input" type="password" id="password-login" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="register">
+                    <h3 class="text-center">
+                        Not signed up? Click <a id="showSignup" href="#">here</a> to signup.
+                    </h3>
+                </div>
+                <div id="signup" class="login-card m-2" style="display: none">
+                    <h2 class="page-title">Signup</h2>
+                    <form class="form signup-form">
+                        <div class="form-group">
+                            <label for="username-signup">Username:</label>
+                            <input class="form-input" type="text" id="username-signup" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email-signup">Email:</label>
+                            <input class="form-input" type="text" id="email-signup" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password-signup">Password:</label>
+                            <input class="form-input" type="password" id="password-signup" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Signup</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- {{!-- {{#if loggedIn}} --}}
     {{!-- /js/logout.js will have event listener for #logout --}} -->
-    <script src="../../js/logout.js"></script>
+    <!-- <script src="../../public/js/logout.js"></script> -->
+    <script src="../../public/js/login.js"></script>
     <!-- {{/if}} --}} -->
 </body>
 

@@ -60,3 +60,24 @@ document
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
+
+// Function to signup info while hiding login info.
+function displaySignupForm() {
+  
+  // collapse the login form & register elements
+  console.log('hello');
+  let loginFormEl = document.querySelector('#login');
+  loginFormEl.style.display = 'none';
+  let registerEl = document.querySelector('#register')
+  registerEl.style.display = 'none';
+  
+  // display Signup Form
+  let registerFormEl = document.querySelector('#signup');
+  registerFormEl.style.display = 'block'
+  return;
+}
+
+// listen for a click on the 'here' in the 'click here to signup'
+document
+  .querySelector('#showSignup') 
+  .addEventListener('click', displaySignupForm);
