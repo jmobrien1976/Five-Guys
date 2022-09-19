@@ -61,19 +61,17 @@ document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
 
-// Function to signup info while hiding login info.
+// Function to display signup info while hiding login info.
 function displaySignupForm() {
   
-  // collapse the login form & register elements
-  console.log('hello');
   let loginFormEl = document.querySelector('#login');
   loginFormEl.style.display = 'none';
+  
   let registerEl = document.querySelector('#register')
   registerEl.style.display = 'none';
   
-  // display Signup Form
-  let registerFormEl = document.querySelector('#signup');
-  registerFormEl.style.display = 'block'
+  let signupFormEl = document.querySelector('#signup');
+  signupFormEl.style.display = 'block'
   return;
 }
 
