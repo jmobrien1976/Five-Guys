@@ -53,11 +53,16 @@ const calcOrderAmount = (items) => {
 
   console.log(itemTemp);
 
-  for (const item of itemTemp) {
-    subTotal += Number.parseFloat(item.price);
-    console.log(subTotal);
+  if (itemTemp) {
+    for (const item of itemTemp) {
+      subTotal += Number.parseFloat(item.price);
+      console.log(subTotal);
+    }
   }
 
+  if (subTotal === 0) {
+    return 50;
+  }
   return subTotal * 100;
 };
 
