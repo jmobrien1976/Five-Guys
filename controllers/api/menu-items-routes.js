@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Menu_items = require("../../models/Menu");
+const Menu_items = require("../../models/menu");
 
 // route to get all menu items
 router.get("/", async (req, res) => {
@@ -8,9 +8,9 @@ router.get("/", async (req, res) => {
     //res.json(menuData);
     const menuItems = menuData.map((items) => items.get({ plain: true }));
     //res.json(menuItems);
-    res.render("homepage", { 
+    res.render("homepage", {
       menuItems,
-      loggedIn: req.session.loggedIn 
+      loggedIn: req.session.loggedIn,
     });
     //TODO: test to make sure it runs with real data
   } catch (err) {
