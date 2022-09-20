@@ -31,23 +31,23 @@ async function initialize() {
   console.log("here");
   const appearance = {
     theme: 'flat',
-  variables: {
-    fontWeightNormal: '500',
-    borderRadius: '2px',
-    colorBackground: 'white',
-    colorPrimary: '#DF1B41',
-    colorPrimaryText: 'white',
-    spacingGridRow: '15px'
-  },
-  rules: {
-    '.Label': {
-      marginBottom: '6px'
+    variables: {
+        fontWeightNormal: '500',
+        borderRadius: '2px',
+        colorBackground: 'white',
+        colorPrimary: '#DF1B41',
+        colorPrimaryText: 'white',
+        spacingGridRow: '15px'
     },
-    '.Tab, .Input, .Block': {
-      boxShadow: '0px 3px 10px rgba(18, 42, 66, 0.08)',
-      padding: '12px'
+    rules: {
+      '.Label': {
+        marginBottom: '6px'
+      },
+      '.Tab, .Input, .Block': {
+        boxShadow: '0px 3px 10px rgba(18, 42, 66, 0.08)',
+        padding: '12px'
+      }
     }
-  }
   };
   elements = stripe.elements({ appearance, clientSecret });
 
